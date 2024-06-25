@@ -43,6 +43,22 @@ $peso = readline();
 
 echo "Es fumador (Si / No): ";
 $fumador = readline();
+// Se almacenan los datos suministrados
+$personal = array(
+    "nombre" => $nombre ,
+    "identificación" => $identificacion,
+    "genero" => $genero,
+    "edad" => $edad,
+    "estatura" => $estatura,
+    "peso" => $peso,
+    "fumador" => $fumador
+);
+// Se muestran los datos registrados
+echo "Los datos registrados son: \n";
+foreach ($personal as $key => $value) {
+  echo "$key: $value \n ";
+}
+// Se indica que el usuario no se a encontrado
 
 } else {
     echo "Usuario no encontrado\n";
