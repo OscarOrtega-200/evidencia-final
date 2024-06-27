@@ -23,57 +23,36 @@ if (array_key_exists($usuario, $users)) {
     echo "$mensaje \n";
 }
 
-// Registro del personal
-echo "Registro del personal\n";
-echo "Ingrese su nombre: ";
-$nombre = readline();
+//registro de personal 
+echo "REGISTRO DE PERSONAL\n";
 
-echo "Ingrese su identificación: ";
-$identificacion = readline();
+//damos opcion para cuantas personas va a registrar
+$respuesta1 = readline("¿Desea registrar nuevos empleados? (S/N) :");
+if (strtoupper($respuesta1) == "S") {
+    $numeroEmpleados = intval(readline("¿Cuantos empleados desea registrar? :"));
+    $empleados = array(); // Inicializamos el array de empleados
+    for ($i = 0; $i < $numeroEmpleados; $i++) {
+        $nombre = readline("Nombre: ");
+        $dni = intval(readline("DNI: "));
+        $genero = readline("Genero  (M / F):");
+        $edad = intval(readline("Edad : "));
+        $estatura = floatval(readline("Estatura (m): "));
+        $peso = floatval(readline("Peso (kg): "));
+        $fumador = readline("¿Fuma? (S/N) :");
 
-echo "Ingrese su genero (M / F ): ";
-$genero = readline();
-
-echo "Ingrese su edad: ";
-$edad = readline();
-
-echo "Ingrese su estatura: ";
-$estatura = readline();
-
-echo "Ingrese su peso: ";
-$peso = readline();
-
-echo "Es fumador (Si / No): ";
-$fumador = readline();
-
-// Se almacenan los datos suministrados
-$personal = array(
-    "nombre" => $nombre,
-    "identificación" => $identificacion,
-    "genero" => $genero,
-    "edad" => $edad,
-    "estatura" => $estatura,
-    "peso" => $peso,
-    "fumador" => $fumador
-);
-
-// Se solicita al usuario que ingrese su búsqueda
-echo "Ingrese su búsqueda (nombre o identificacion): ";
-$busqueda = readline();
-
-// Se busca por nombre o identificacion del personal
-foreach ($personal as $key => $value) {
-    if (stripos($personal['nombre'], $busqueda)!== false || stripos($personal['identificación'], $busqueda)!== false) {
-        echo "Resultados de la búsqueda:\n";
-        echo "Género: ". $personal['genero']. "\n";
-        echo "Edad: ". $personal['edad']. "\n";
-
-        break;
+        $empleados[] = ['nombre' => $nombre, 'dni' => $dni, 'genero' => $genero, 'edad' => $edad, 'estatura' => $estatura, 'peso' => $peso, 'fumador' => $fumador];
     }
+} else {
+    echo "Adios";
 }
 
-// Se indica que el usuario no se a encontrado
-if (!isset($personal['nombre'])) {
-    echo "Usuario no encontrado\n";
+$buscar = readline("Ingrese nombre o DNI, de empleado a buscar: ");
+foreach ($empleados as $empleado) {
+    if ($empleado['nombre'] == $buscar || $empleado['dni'] == $buscar) {
+        echo "EMPLEADO ENCONTRADO:\n";
+        echo "Edad: " . $empleado['edad'] . "\n";
+        echo "Genero: " . $empleado['genero'] . "\n";
+        break;
+    }
 }
 ?>
